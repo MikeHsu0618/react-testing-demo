@@ -2,17 +2,19 @@ import {fireEvent, render, screen, waitFor} from "@testing-library/react"
 import Login from './Login'
 import axios from 'axios'
 
-jest.mock('axios', () => ({
-    __esModule:true,
-    default:{
-        get: () => ({
-            data: {
-                id: 1,
-                name: "John"
-            }
-        })
-    }
-}))
+jest.mock('axios')
+
+// jest.mock('axios', () => ({
+//     __esModule:true,
+//     default:{
+//         get: () => ({
+//             data: {
+//                 id: 1,
+//                 name: "John"
+//             }
+//         })
+//     }
+// }))
 
 test("username input should be render", () => {
     render(<Login/>)
@@ -98,6 +100,8 @@ test("loading should be rendered when clicked", () => {
     const passwordInputEl = screen.getByPlaceholderText('password')
     const userInputEl = screen.getByPlaceholderText('username')
 
+    axios.get = jest.fn().mockImplementation(()=> ({data: {id: 1, name: 'John'}}))
+
     const testValue = "test";
     fireEvent.change(passwordInputEl, {target: {value: testValue}})
     fireEvent.change(userInputEl, {target: {value: testValue}})
@@ -126,6 +130,13 @@ test("user should not be rendered after fetching", async () => {
     const passwordInputEl = screen.getByPlaceholderText('password')
     const userInputEl = screen.getByPlaceholderText('username')
 
+    // mock api
+     const mockGet = jest.fn()
+    axios.get = mockGet.mockImplementation(()=> ({data: {id: 1, name: 'John'}}))
+    // axios.get = jest.fn().mockReturnValue({data: {id: 1, name: 'John'}})
+    // axios.get = jest.fn().mockReturnValueOnce({data: {id: 1, name: 'John'}})
+
+
     // 建立假資料
     const testValue = "test";
     // 執行程式
@@ -134,6 +145,7 @@ test("user should not be rendered after fetching", async () => {
     fireEvent.click(buttonEl);
 
     // 驗證結果
+    expect(mockGet.mock.calls.length).toEqual(1)
     const userItem = await screen.findByText("John")
     expect(userItem).toBeInTheDocument()
 })
