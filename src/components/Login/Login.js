@@ -21,6 +21,7 @@ const Login = () => {
     }
     return (
         <div className="container">
+            <h1>Login</h1>
             <span className="user">{user.name}</span>
             <form>
                 <input

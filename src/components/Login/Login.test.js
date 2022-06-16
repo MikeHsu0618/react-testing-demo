@@ -131,11 +131,10 @@ test("user should not be rendered after fetching", async () => {
     const userInputEl = screen.getByPlaceholderText('username')
 
     // mock api
-     const mockGet = jest.fn()
+    const mockGet = jest.fn()
     axios.get = mockGet.mockImplementation(()=> ({data: {id: 1, name: 'John'}}))
     // axios.get = jest.fn().mockReturnValue({data: {id: 1, name: 'John'}})
     // axios.get = jest.fn().mockReturnValueOnce({data: {id: 1, name: 'John'}})
-
 
     // 建立假資料
     const testValue = "test";

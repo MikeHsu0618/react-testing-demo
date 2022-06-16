@@ -2,6 +2,7 @@ import React from 'react'
 import Button from "./Button"
 import { render, screen, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer'
+
 afterEach(cleanup);
 
 test('render without crashing', () => {
