@@ -84,6 +84,8 @@
   "devDependencies": {
     "@testing-library/react": "^13.3.0",
     "cypress": "^10.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "react-test-renderer": "^18.1.0"
   },
   "jest": {
