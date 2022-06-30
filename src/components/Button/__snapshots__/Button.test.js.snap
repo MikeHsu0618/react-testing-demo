@@ -5,6 +5,6 @@ exports[`matcher snapshot 1`] = `
   className="button-style"
   data-testid="button"
 >
-  save1
+  save
 </div>
 `;
